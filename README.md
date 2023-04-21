@@ -28,7 +28,7 @@ If the GUID in "Guid.xref" occurs in "putty.log", then replace it to the corresp
   
   
   
-In ClearlyDocument, the file lists all GUID in the work directory
+In ClearlyDocument, the file lists all GUID in the work directory (Summary table of GUIDs)
 
 
 In Conflict_GUID, the file lists all of different name used the same GUID.
