@@ -5,6 +5,7 @@ The purpose of project is creating a file that list all GUID and name in work di
 If the GUID in "Guid.xref" occurs in "putty.log", then replace it to the corresponded name.
 
 
+
 "putty.log = your_log_file_name"
 
 ".exe file is in the dist directory"
@@ -12,6 +13,7 @@ If the GUID in "Guid.xref" occurs in "putty.log", then replace it to the corresp
 "work directory = root directory of Insyde code base"
 
 "The file collect the some special GUID defined in c or h file are not accurately"
+
 
 
   1.Path is your work directory (need absolute path)
@@ -23,6 +25,7 @@ If the GUID in "Guid.xref" occurs in "putty.log", then replace it to the corresp
   4.The new files created are called "ClearlyDocument", "Conflict_GUID", "new_your_log_file_name"
   
   5.If the executed program is canceled suddenly. You may input error or you should rename your log file
+  
   
   
 In ClearlyDocument, the file lists all GUID in the work directory
