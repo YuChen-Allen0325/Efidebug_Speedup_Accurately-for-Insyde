@@ -12,7 +12,7 @@ If the GUID in "Guid.xref" occurs in "putty.log", then replace it to the corresp
 
 "work directory = root directory of Insyde code base"
 
-"This program only use to after your work directory efidebug, so your work directory must have "Build" folder"
+"This program only use to after your work directory efidebug build, so your work directory must have "Build" folder"
 
 "The file collect the some special GUID defined in c or h file are not accurately"
 
