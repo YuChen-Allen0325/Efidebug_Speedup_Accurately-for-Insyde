@@ -38,7 +38,7 @@ In Conflict_GUID, the file lists all of different name used the same GUID.
 "unused" : You can only find out in the "ClearlyDocument"
 
 
-In new_your_log_file_name, the file generated after your_log_file_name replaced corresponded name 
+In new_your_log_file_name, the file generated after your_log_file_name replaced GUID to corresponded name
 
 
 "Don't name your file to "ClearlyDocument" or "Conflict_GUID" before running "Efidebug_Speedup.exe", or there will be overlayed !"
