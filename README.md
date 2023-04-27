@@ -43,7 +43,7 @@ In new_your_log_file_name, the file generated after your_log_file_name replaced 
 
 "Don't name your file to "ClearlyDocument" or "Conflict_GUID" before running "Efidebug_Speedup.exe", or there will be overlayed !"
 
-Demo as below:
+Demonstration as below:
 
 1. original file and work directory
 
