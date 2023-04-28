@@ -8,6 +8,33 @@ from CHWriteLog import CHWriteLog as CHWL
 from GuidXrefTransform import TransformToUppercaseAll as TransGuidXref
 
 
+
+counter = 0
+quick_analysis = False
+
+while (1) :
+    if counter >= 1:
+        print("your input illegal !")
+    
+    optional_input = input("Do you want to quick analysis? If you want, you will not get the ClearlyDocument!   please input Y/N : ")
+    optional_input = str(optional_input)
+
+    if optional_input == 'Y':
+        quick_analysis = True
+        break
+    
+    if optional_input == 'N':
+        break
+    
+    if optional_input == 'y':
+        quick_analysis = True
+        break
+    
+    if optional_input == 'n':
+        break
+    
+    counter += 1
+
 directory = input("please input your work directory path (e.g. : C:\ADL_N_Setup): ")
 directory = str(directory)
 logfile_name = input("please input your log file name (include file extension  e.g. : putty.log): ")
@@ -55,7 +82,8 @@ if os.path.exists((directory + "\\" + logfile_name)) and (check_new_file_exist =
         if os.path.exists((directory + "\\" + "ClearlyDocument.txt")):
             os.remove((directory + "\\" + "ClearlyDocument.txt"))
         
-        print("\n\nCreate ClearlyDocument.txt...")
+        if quick_analysis == False:
+            print("\n\nCreate ClearlyDocument.txt...")
         
         for root, dirs, files in os.walk(directory):
             dirs[:] = [d for d in dirs if d not in exclude_dirs]
@@ -65,20 +93,21 @@ if os.path.exists((directory + "\\" + logfile_name)) and (check_new_file_exist =
                 if (Have_GUID_Ref_file in (os.path.join(root, filename))) and (ScanCH in (os.path.join(root, filename))):
                     Guid_Ref = os.path.join(root, filename)   # Get Guid.xref path
                     
-                elif filename.endswith(extension_inf):
-                    InfWL.InfWriteLog(os.path.join(root, filename), directory)
-                    
-                elif filename.endswith(extension_dec):
-                    DecWL.DecWriteLog(os.path.join(root, filename), directory)                      
-                    
-                elif (filename.endswith(extension_c)) and (ScanCH not in root):
-                    CHWL.CHWriteLog(os.path.join(root, filename),directory)            
-                    
-                elif (filename.endswith(extension_h)) and (ScanCH not in root):
-                    CHWL.CHWriteLog(os.path.join(root, filename),directory)
-                    
-                else:
-                    continue
+                if quick_analysis == False:
+                    if filename.endswith(extension_inf):
+                        InfWL.InfWriteLog(os.path.join(root, filename), directory)
+                        
+                    elif filename.endswith(extension_dec):
+                        DecWL.DecWriteLog(os.path.join(root, filename), directory)                      
+                        
+                    elif (filename.endswith(extension_c)) and (ScanCH not in root):
+                        CHWL.CHWriteLog(os.path.join(root, filename),directory)            
+                        
+                    elif (filename.endswith(extension_h)) and (ScanCH not in root):
+                        CHWL.CHWriteLog(os.path.join(root, filename),directory)
+                        
+                    else:
+                        continue
     
         if Guid_Ref == '':
             Make_Sure_Execute_Flag = False
@@ -134,36 +163,37 @@ if os.path.exists((directory + "\\" + logfile_name)) and (check_new_file_exist =
                  
     #--------------------------------------- ClearlyDocument orderliness -----------------------------------------
 
-
-        print("Organize ClearlyDocument.txt file...")
-        
-        with open((directory + "\\" + "ClearlyDocument.txt"), 'r') as ClrDoc:
-            for Unit_ClrDoc in ClrDoc:
-                
-                if (Unit_ClrDoc == '') or (Unit_ClrDoc == ' '):
-                    continue
-                
-                ClearlyDocumentGuid = Unit_ClrDoc[0:36]
-                
-                if (Bracket in ClearlyDocumentGuid):
-                    continue
-                
-                ClearlyDocumentName = Unit_ClrDoc[50:]
-                ClearlyDocumentName = ClearlyDocumentName.replace(' ','')
-                
-                ClearlyDocumentString = ClearlyDocumentGuid + ' ' + ClearlyDocumentName
-                
-                ClearlyDocumentString_list.append(ClearlyDocumentString)
-                
-            ClearlyDocumentString_set = set(ClearlyDocumentString_list)
-            ClearlyDocumentString_list = list(ClearlyDocumentString_set)
+        if quick_analysis == False:
             
-        os.remove((directory + "\\" + "ClearlyDocument.txt"))        
-        
-        with open((directory + "\\" + "ClearlyDocument.txt"), 'a') as ClrDoc:
+            print("Organize ClearlyDocument.txt file...")
             
-            for ClearlyDocumentString_list_Row in range(len(ClearlyDocumentString_list)):
-                ClrDoc.write(ClearlyDocumentString_list[ClearlyDocumentString_list_Row])
+            with open((directory + "\\" + "ClearlyDocument.txt"), 'r') as ClrDoc:
+                for Unit_ClrDoc in ClrDoc:
+                    
+                    if (Unit_ClrDoc == '') or (Unit_ClrDoc == ' '):
+                        continue
+                    
+                    ClearlyDocumentGuid = Unit_ClrDoc[0:36]
+                    
+                    if (Bracket in ClearlyDocumentGuid):
+                        continue
+                    
+                    ClearlyDocumentName = Unit_ClrDoc[50:]
+                    ClearlyDocumentName = ClearlyDocumentName.replace(' ','')
+                    
+                    ClearlyDocumentString = ClearlyDocumentGuid + ' ' + ClearlyDocumentName
+                    
+                    ClearlyDocumentString_list.append(ClearlyDocumentString)
+                    
+                ClearlyDocumentString_set = set(ClearlyDocumentString_list)
+                ClearlyDocumentString_list = list(ClearlyDocumentString_set)
+                
+            os.remove((directory + "\\" + "ClearlyDocument.txt"))        
+            
+            with open((directory + "\\" + "ClearlyDocument.txt"), 'a') as ClrDoc:
+                
+                for ClearlyDocumentString_list_Row in range(len(ClearlyDocumentString_list)):
+                    ClrDoc.write(ClearlyDocumentString_list[ClearlyDocumentString_list_Row])
 
 
     # --------------------------- Guid.xref compare with ClearlyDocument.txt to get Conflict_GUID.txt -----------------------------------
@@ -190,24 +220,24 @@ if os.path.exists((directory + "\\" + logfile_name)) and (check_new_file_exist =
                     if len(GuidXrefDic_NameList) > 1:
                         GuidXrefDic_Conflict[GuidXrefDic_Guid] = GuidXrefDic_NameList  #conflict dic (used)
                         
-       
-            for GuidXrefDic_Conflict_Guid, GuidXrefDic_Conflict_NameList in GuidXrefDic_Conflict.items():
-                
-                with open((directory + "\\" + "ClearlyDocument.txt"), 'r') as ClrDoc:
-                    for Unit_ClrDoc in ClrDoc:
-                        
-                        if GuidXrefDic_Conflict_Guid in Unit_ClrDoc:
-                           
-                            ClrDoc_Name = Unit_ClrDoc[37:]
-                            ClrDoc_Name = ClrDoc_Name.replace('\n','')
+            if quick_analysis == False:
+                for GuidXrefDic_Conflict_Guid, GuidXrefDic_Conflict_NameList in GuidXrefDic_Conflict.items():
+                    
+                    with open((directory + "\\" + "ClearlyDocument.txt"), 'r') as ClrDoc:
+                        for Unit_ClrDoc in ClrDoc:
+                            
+                            if GuidXrefDic_Conflict_Guid in Unit_ClrDoc:
+                            
+                                ClrDoc_Name = Unit_ClrDoc[37:]
+                                ClrDoc_Name = ClrDoc_Name.replace('\n','')
 
-                            if ClrDoc_Name not in GuidXrefDic_Conflict_NameList:
-                                
-                                if GuidXrefDic_Conflict_Guid in UnUsedConflictGuidDic.keys():           
-                                    UnUsedConflictGuidDic[GuidXrefDic_Conflict_Guid].append(ClrDoc_Name)   #conflict dic (unused)
+                                if ClrDoc_Name not in GuidXrefDic_Conflict_NameList:
                                     
-                                else:
-                                    UnUsedConflictGuidDic[GuidXrefDic_Conflict_Guid] = [ClrDoc_Name]
+                                    if GuidXrefDic_Conflict_Guid in UnUsedConflictGuidDic.keys():           
+                                        UnUsedConflictGuidDic[GuidXrefDic_Conflict_Guid].append(ClrDoc_Name)   #conflict dic (unused)
+                                        
+                                    else:
+                                        UnUsedConflictGuidDic[GuidXrefDic_Conflict_Guid] = [ClrDoc_Name]
                                     
                  
             with open((directory + "\\" + "Conflict_GUID.txt"), 'a') as CftDoc:
@@ -224,8 +254,6 @@ if os.path.exists((directory + "\\" + logfile_name)) and (check_new_file_exist =
                 
     except:
         pass
-        
-        
 
 else:
     print("Your log file not exist or you should rename your log file!")
