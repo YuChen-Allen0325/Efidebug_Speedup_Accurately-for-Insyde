@@ -65,8 +65,10 @@ This option up to user require (choose 'Y', not produce Summary table of GUIDs)!
 3. result of production file
 
 if choose 'Y':
+
 ![050204](https://user-images.githubusercontent.com/94295939/235560235-5f5915ac-95b2-4f61-953b-792639a1ab49.jpg)
 
 if choose 'N':
+
 ![050205](https://user-images.githubusercontent.com/94295939/235560284-22107074-41e5-4dad-9350-9ba2aad25c28.jpg)
 
