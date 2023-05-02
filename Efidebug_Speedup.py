@@ -39,6 +39,7 @@ directory = input("please input your work directory path (e.g. : C:\ADL_N_Setup)
 directory = str(directory)
 logfile_name = input("please input your log file name (include file extension  e.g. : putty.log): ")
 logfile_name = str(logfile_name)
+XrefExistFlag = False
 Make_Sure_Execute_Flag = True
 Bracket = '{'
 extension_c = '.c'
@@ -77,40 +78,49 @@ if os.path.exists((directory + "\\" + logfile_name)) and (check_new_file_exist =
     
     try:
         
-        shutil.copy(original_file, new_file)   # copy original log file to new log file
+        if os.path.exists((directory + "\\" + "Guid.xref")):
+            Guid_Ref = directory + "\\" + "Guid.xref"
+            XrefExistFlag = True
         
         if os.path.exists((directory + "\\" + "ClearlyDocument.txt")):
             os.remove((directory + "\\" + "ClearlyDocument.txt"))
         
         if quick_analysis == False:
-            print("\n\nCreate ClearlyDocument.txt...")
-        
-        for root, dirs, files in os.walk(directory):
-            dirs[:] = [d for d in dirs if d not in exclude_dirs]
+            print("\nCreate ClearlyDocument.txt...")
+        else:
+            print("\n")
             
-            for filename in files:
+            
+        if not((XrefExistFlag == True) and (quick_analysis == True)):
+            for root, dirs, files in os.walk(directory):
+                dirs[:] = [d for d in dirs if d not in exclude_dirs]
                 
-                if (Have_GUID_Ref_file in (os.path.join(root, filename))) and (ScanCH in (os.path.join(root, filename))):
-                    Guid_Ref = os.path.join(root, filename)   # Get Guid.xref path
+                for filename in files:
                     
-                if quick_analysis == False:
-                    if filename.endswith(extension_inf):
-                        InfWL.InfWriteLog(os.path.join(root, filename), directory)
+                    if XrefExistFlag == False:
+                        if (Have_GUID_Ref_file in (os.path.join(root, filename))) and (ScanCH in (os.path.join(root, filename))):
+                            Guid_Ref = os.path.join(root, filename)   # Get Guid.xref path
                         
-                    elif filename.endswith(extension_dec):
-                        DecWL.DecWriteLog(os.path.join(root, filename), directory)                      
-                        
-                    elif (filename.endswith(extension_c)) and (ScanCH not in root):
-                        CHWL.CHWriteLog(os.path.join(root, filename),directory)            
-                        
-                    elif (filename.endswith(extension_h)) and (ScanCH not in root):
-                        CHWL.CHWriteLog(os.path.join(root, filename),directory)
-                        
-                    else:
-                        continue
+                    if quick_analysis == False:
+                        if filename.endswith(extension_inf):
+                            InfWL.InfWriteLog(os.path.join(root, filename), directory)
+                            
+                        elif filename.endswith(extension_dec):
+                            DecWL.DecWriteLog(os.path.join(root, filename), directory)                      
+                            
+                        elif (filename.endswith(extension_c)) and (ScanCH not in root):
+                            CHWL.CHWriteLog(os.path.join(root, filename),directory)            
+                            
+                        elif (filename.endswith(extension_h)) and (ScanCH not in root):
+                            CHWL.CHWriteLog(os.path.join(root, filename),directory)
+                            
+                        else:
+                            continue
     
         if Guid_Ref == '':
             Make_Sure_Execute_Flag = False
+            
+        shutil.copy(original_file, new_file)   # copy original log file to new log file
             
     except:
         pass
