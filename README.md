@@ -53,18 +53,20 @@ Demonstration as below:
 
 2. input requirements
 
-![1682582303265](https://user-images.githubusercontent.com/94295939/234798334-46c5b7f8-5062-4d91-aa0a-5304a42ca64e.jpg)
+This option up to user require (choose 'Y', not produce Summary table of GUIDs)!
+![050201](https://user-images.githubusercontent.com/94295939/235560095-bf5c9e99-2e7d-4cd8-b822-60144ec95f40.jpg)
 
-![1682582385630](https://user-images.githubusercontent.com/94295939/234798368-27d3b1da-7a4f-4b8e-bbbc-f65cc85613cf.jpg)
+![050202](https://user-images.githubusercontent.com/94295939/235560153-52cf1547-5478-4e29-aa2a-d07d6975335f.jpg)
+
+![050203](https://user-images.githubusercontent.com/94295939/235560160-88782630-4fc9-45d9-a223-6ee23409eb77.jpg)
 
 
-3. executed process
 
-![1682579548962](https://user-images.githubusercontent.com/94295939/234790140-e05da240-3f35-4446-aef5-a122137dcc04.jpg)
+3. result of production file
 
-![1682579555230](https://user-images.githubusercontent.com/94295939/234790206-16dc0806-7abc-41cf-b010-7483c6ff84e3.jpg)
+if choose 'Y':
+![050204](https://user-images.githubusercontent.com/94295939/235560235-5f5915ac-95b2-4f61-953b-792639a1ab49.jpg)
 
-4. result of production file
-
-![DEMO4](https://user-images.githubusercontent.com/94295939/234796494-1df9fe23-9f70-4d69-998e-68217812d67c.jpg)
+if choose 'N':
+![050205](https://user-images.githubusercontent.com/94295939/235560284-22107074-41e5-4dad-9350-9ba2aad25c28.jpg)
 
