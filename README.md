@@ -53,7 +53,7 @@ Demonstration as below:
 
 2. input requirements
 
-This option up to user require (choose 'Y', not produce Summary table of GUIDs)!
+This option up to user requirement (choose 'Y', not produce Summary table of GUIDs)!
 ![050201](https://user-images.githubusercontent.com/94295939/235560095-bf5c9e99-2e7d-4cd8-b822-60144ec95f40.jpg)
 
 ![050202](https://user-images.githubusercontent.com/94295939/235560153-52cf1547-5478-4e29-aa2a-d07d6975335f.jpg)
